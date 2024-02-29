@@ -1,12 +1,12 @@
-import express from "express";
+import express, { Router } from "express";
 import { 
     getUsers, 
     addUser, 
     updateUser, 
     deleteUser 
-} from "../controllers/users.js";
+} from "../controllers/users"; // Remova a extensão .js
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get("/", getUsers);
 

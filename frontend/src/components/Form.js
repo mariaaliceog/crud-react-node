@@ -45,11 +45,10 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
     useEffect(() => {
         if(onEdit){
             const user = ref.current;
-
-            user.nome.value = onEdit.nome;
+            user.name.value = onEdit.name;
             user.email.value = onEdit.email;
-            user.fone.value = onEdit.fone;
-            user.data_nascimento.value = onEdit.data_nascimento;
+            user.phone.value = onEdit.phone;
+            user.birthDate.value = onEdit.birthDate;
         }
     }, [onEdit]);
 
@@ -59,10 +58,10 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
         const user = ref.current;
 
         if(
-            !user.nome.value ||
+            !user.name.value ||
             !user.email.value ||
-            !user.fone.value ||
-            !user.data_nascimento.value
+            !user.phone.value ||
+            !user.birthDate.value
         ){
             return toast.warn("Preencha todos os campos!");
         }
@@ -70,29 +69,29 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
         if (onEdit){
             await axios
             .put("http://localhost:8800/"+ onEdit.id, {
-                nome: user.nome.value,
+                name: user.name.value,
                 email: user.email.value,
-                fone: user.fone.value,
-                data_nascimento: user.data_nascimento.value,
+                phone: user.phone.value,
+                birthDate: user.birthDate.value,
             })
             .then(({ data }) => toast.success(data))
             .catch(({ data }) => toast.error(data));
         } else {
             await axios
             .post("http://localhost:8800", {
-                nome: user.nome.value,
+                name: user.name.value,
                 email: user.email.value,
-                fone: user.fone.value,
-                data_nascimento: user.data_nascimento.value,
+                phone: user.phone.value,
+                birthDate: user.birthDate.value,
             })
             .then(({ data }) => toast.success(data))
             .catch(({ data }) => toast.error(data));
         }
 
-        user.nome.value ="";
+        user.name.value ="";
         user.email.value ="";
-        user.fone.value ="";
-        user.data_nascimento.value ="";
+        user.phone.value ="";
+        user.birthDate.value ="";
 
         setOnEdit(null); //limpa o estado de edição e possibilita a adição de novos usuários
         getUsers();
@@ -102,7 +101,7 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
         <FormContainer ref={ref} onSubmit={handleSubmit}>
             <InputArea>
                 <Label>Nome</Label>
-                <Input name="nome"/>
+                <Input name="name"/>
             </InputArea>
             <InputArea>
                 <Label>E-mail</Label>
@@ -110,11 +109,11 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
             </InputArea>
             <InputArea>
                 <Label>Telefone</Label>
-                <Input name="fone"/>
+                <Input name="phone"/>
             </InputArea>
             <InputArea>
                 <Label>Data de Nascimento</Label>
-                <Input name="data_nascimento" type="date"/>
+                <Input name="birthDate" type="date"/>
             </InputArea>
 
             <Button type="submit">SALVAR</Button>
