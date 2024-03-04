@@ -1,3 +1,4 @@
+require('dotenv').config();
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -49,7 +50,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
 
     const handleDelete = async (id) => {
         await axios
-            .delete("http://localhost:8800/"+id)
+            .delete(`${process.env.API_BASE_URL}`+id)
             .then(({ data }) => {
                 const newArray = users.filter((user) => user.id !== id);
 

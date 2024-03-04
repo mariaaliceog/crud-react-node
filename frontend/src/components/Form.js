@@ -1,3 +1,4 @@
+require('dotenv').config();
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -68,7 +69,7 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
 
         if (onEdit){
             await axios
-            .put("http://localhost:8800/"+ onEdit.id, {
+            .put(`${process.env.API_BASE_URL}`+ onEdit.id, {
                 name: user.name.value,
                 email: user.email.value,
                 phone: user.phone.value,
@@ -78,7 +79,7 @@ const Form = ({ getUsers, onEdit, setOnEdit}) => {
             .catch(({ data }) => toast.error(data));
         } else {
             await axios
-            .post("http://localhost:8800", {
+            .post(`${process.env.API_BASE_URL}`, {
                 name: user.name.value,
                 email: user.email.value,
                 phone: user.phone.value,
