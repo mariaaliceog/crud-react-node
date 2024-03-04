@@ -8,7 +8,7 @@ export const getUsers = async (_: Request, res: Response<any, Record<string, any
         const users = await prisma.user.findMany();
         return res.status(200).json(users);
     } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Erro ao buscar usuários: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
@@ -25,7 +25,7 @@ export const addUser = async (req: Request, res: Response<any, Record<string, an
         });
         return res.status(200).json("Usuário criado com sucesso!");
     } catch (error) {
-        console.error("Error creating user:", error);
+        console.error("Erro ao cadastrar o usuário: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
@@ -45,7 +45,7 @@ export const updateUser = async (req: Request, res: Response<any, Record<string,
         });
         return res.status(200).json("Usuário atualizado com sucesso!");
     } catch (error) {
-        console.error("Error updating user:", error);
+        console.error("Erro ao atualizar o usuário: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
@@ -59,7 +59,7 @@ export const deleteUser = async (req: Request, res: Response<any, Record<string,
         });
         return res.status(200).json("Usuário deletado com sucesso!");
     } catch (error) {
-        console.error("Error deleting user:", error);
+        console.error("Erro ao deletar usuário: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };

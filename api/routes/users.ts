@@ -4,9 +4,9 @@ import {
     addUser, 
     updateUser, 
     deleteUser 
-} from "../controllers/users"; // Remova a extensão .js
+} from "../controllers/users"; 
 
-const router: Router = express.Router();
+const router = Router();
 
 router.get("/", getUsers);
 
@@ -16,4 +16,4 @@ router.put("/:id", updateUser);
 
 router.delete("/:id", deleteUser);
 
-export default router;
+export { router };
